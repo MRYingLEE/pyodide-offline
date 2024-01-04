@@ -29,6 +29,7 @@ jobs:
           find ./dist -type f -name "*.whl"
           find ./dist -type f -name "*.whl" -exec bash -c 'mv "$0" "${0%.whl}.whl.zip"' {} \;
           cp ./wheels/*.whl.zip ./dist/static/pyodide
+          cp ./modified/service-worker.js ./dist
           grep -rl --exclude='*.whl.zip' '.whl' ./dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
