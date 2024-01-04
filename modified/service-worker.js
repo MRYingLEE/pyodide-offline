@@ -31,7 +31,7 @@ function maybeAdapted(request, url) {
  */
 function isCachedWheelFileName(fileName) {
   // Only browser friendly wheel files are cached.
-  if ((!fileName.endsWith('-py3-none-any.whl')) && (!fileName.endsWith('_wasm32.whl'))){
+  if ((!fileName.endsWith('-none-any.whl')) && (!fileName.endsWith('_wasm32.whl'))){
       return false;
   }
   // Regular expression pattern for Python Wheel file name
