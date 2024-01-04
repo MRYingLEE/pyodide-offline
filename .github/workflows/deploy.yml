@@ -28,10 +28,7 @@ jobs:
           ls ./dist -l
           find ./dist -type f -name "*.whl"
           find ./dist -type f -name "*.whl" -exec bash -c 'mv "$0" "${0%.whl}.whl.zip"' {} \;
-          cp ./modified/pyodide* ./dist/static/pyodide/
-          grep -rl "piplite-0.2.0-py3-none-any.whl" ./dist/extensions/@jupyterlite/pyodide-kernel-extension/static/
-          cp ./modified/424.05b5cf9e6b39acab6ea7.js ./dist/extensions/@jupyterlite/pyodide-kernel-extension/static/424.05b5cf9e6b39acab6ea7.js
-          cp ./modified/all.json ./dist/extensions/@jupyterlite/pyodide-kernel-extension/static/pypi/all.json
+          cp ./wheels/*.whl.zip ./dist/static/pyodide
           grep -rl --exclude='*.whl.zip' '.whl' ./dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
