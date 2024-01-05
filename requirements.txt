@@ -47,3 +47,7 @@ ipyleaflet
 # Python: plotting libraries (optional)
 plotly>=5,<6
 bqplot
+
+# built-in packages with specific version
+openai==1.6.1
+          
