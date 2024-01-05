@@ -27,6 +27,8 @@ jobs:
           jupyter lite build --contents content --output-dir dist --pyodide https://github.com/pyodide/pyodide/releases/download/0.24.1/pyodide-0.24.1.tar.bz2
           ls ./dist -l
           find ./dist -type f -name "*.whl"
+          cp ./.cache/pyodide/pyodide/pyodide/*.whl ./dist/static/pyodide
+          cp ./.cache/pyodide/pyodide/pyodide/*.whl.metadata ./dist/static/pyodide
           find ./dist -type f -name "*.whl" -exec bash -c 'mv "$0" "${0%.whl}.whl.zip"' {} \;
           cp ./wheels/*.whl.zip ./dist/static/pyodide
           cp ./modified/service-worker.js ./dist
