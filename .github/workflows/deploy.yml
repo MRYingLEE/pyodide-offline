@@ -23,7 +23,7 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Build the JupyterLite site
         run: |
-          cp README.md content
+          # cp README.md content
           touch content/built-in-wheels.txt
           jupyter lite build --contents content --output-dir dist --pyodide https://github.com/pyodide/pyodide/releases/download/0.24.1/pyodide-0.24.1.tar.bz2
           cp ./.cache/pyodide/pyodide/pyodide/*.whl ./dist/static/pyodide
