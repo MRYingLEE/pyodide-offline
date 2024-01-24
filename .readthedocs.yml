@@ -4,6 +4,16 @@ build:
   os: "ubuntu-20.04"
   tools:
     python: "mambaforge-4.10"
+  jobs:
+    pre_build:
+      - touch content/built-in-wheels.txt
+    post_build:
+      - cp ./.cache/pyodide/pyodide/pyodide/*.whl ./dist/static/pyodide
+      - cp ./wheels/*.whl ./dist/static/pyodide
+      - for file in ./dist/static/pyodide/*.whl; do basename "$file"; done | tr -cd '\11\12\15\40-\176' > ./dist/files/built-in-wheels.txt
+      - find ./dist -type f -name "*.whl" -exec bash -c 'mv "$0" "${0%.whl}.whl.zip"' {} \;
+      - cp ./modified/service-worker.js ./dist
+      - grep -rl --exclude='*.whl.zip' '.whl' ./dist
 
 conda:
   environment: docs/environment.yml
