@@ -25,7 +25,7 @@ jobs:
         run: |
           # cp README.md content
           touch content/built-in-wheels.txt
-          jupyter lite build --contents content --output-dir dist --pyodide https://github.com/pyodide/pyodide/releases/download/0.24.1/pyodide-0.24.1.tar.bz2
+          jupyter lite build --contents content --output-dir dist --pyodide https://github.com/pyodide/pyodide/releases/download/0.25.0/pyodide-0.25.0.tar.bz2
           cp ./.cache/pyodide/pyodide/pyodide/*.whl ./dist/static/pyodide
           cp ./wheels/*.whl ./dist/static/pyodide
           for file in ./dist/static/pyodide/*.whl; do basename "$file"; done | tr -cd '\11\12\15\40-\176' > ./dist/files/built-in-wheels.txt
