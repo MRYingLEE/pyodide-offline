@@ -43,7 +43,7 @@ function isCachedWheelFileName(fileName) {
 }
 
 /** Get an adapted Request according to the resource postfix. */
-function adpatedRequest(request) {
+function adaptedRequest(request) {
   const url = new URL(request.url);
   // Extract the filename and parameters
   if (!maybeAdapted(request, url)) return request;
@@ -57,12 +57,17 @@ function adpatedRequest(request) {
   pathSegments.pop();
   let pathWithoutFilename = pathSegments.join('/');
 
-  // Construct the new URL
-  const newURL = new URL(`${pathWithoutFilename}/static/pyodide/${filename}.zip${params}`);
+  let newURL = undefined;
+  if (filename.startsWith('ipython-8.')) {
+    newURL = new URL(`${pathWithoutFilename}/static/pyodide/ipython-8.21.0-py3-none-any.whl.zip${params}`);
+  } else {
+    // Construct the new URL
+    newURL = new URL(`${pathWithoutFilename}/static/pyodide/${filename}.zip${params}`);
+  }
 
   return new Request(newURL, { method: request.method, headers: request.headers, body: request.body, mode: request.mode });
-  
 }
+
 async function maybeFromCache(t) {
   const { request: a } = t;
   let n = await fromCache(a);
@@ -81,7 +86,7 @@ async function fromCache(t) {
   return n && 404 !== n.status ? n : null;
 }
 async function refetch(t) {
-  const nt=adpatedRequest(t);
+  const nt = adaptedRequest(t);
   const a = await fetch(nt);
   return await updateCache(t, a), a;
 }
