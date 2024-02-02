@@ -74,7 +74,7 @@ async function maybeFromCache(t) {
   if (n) {
     t.waitUntil(refetch(a));
   } else {
-    const na = adpatedRequest(a);
+    const na = adaptedRequest(a);
     n = await fetch(na);
     t.waitUntil(updateCache(a, n.clone()));
   }
