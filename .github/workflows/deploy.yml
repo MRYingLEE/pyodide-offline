@@ -30,7 +30,7 @@ jobs:
           cp ./wheels/*.whl ./dist/static/pyodide
           for file in ./dist/static/pyodide/*.whl; do basename "$file"; done | tr -cd '\11\12\15\40-\176' > ./dist/files/built-in-wheels.txt
           find ./dist -type f -name "*.whl" -exec bash -c 'mv "$0" "${0%.whl}.whl.zip"' {} \;
-          cp ./modified/service-worker.js ./dist
+          # cp ./modified/service-worker.js ./dist
           grep -rl --exclude='*.whl.zip' '.whl' ./dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
